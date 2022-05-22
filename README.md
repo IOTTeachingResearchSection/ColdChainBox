@@ -8,4 +8,5 @@
     * face recognition      ：人脸检测
     * rfid                  ：rfid识别
     * infrared_temp         ：红外体温
+* CHANGE_LOG                : 更新日志
 
