@@ -58,8 +58,11 @@ class MySql:
 
 if __name__ == '__main__':
     a = MySql()
-    # a.insert(id='20220515005',foodname='荔枝')
-#     a.upload(id='20220515001',foodname='西瓜')
+    a.insert(id='20220525132',foodname='laquat')
+    a.insert(id='20220525084',foodname='grape')
+    a.insert(id='20220525056',foodname='peach')
+    a.insert(id='20220516113',foodname='orange')
+    #a.upload(id='20220515001',foodname='西瓜')
     c = a.queryAll('food')
     print(c)
 #     a.updata('20220515001',puttime=8,gettime=2)

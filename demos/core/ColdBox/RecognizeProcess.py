@@ -14,7 +14,7 @@ class RecognizeProcess:
 
     def __init__(self) -> None:
 
-
+        
         self.facePass = False
         self.maskPass = False
         self.glovesPass = False
@@ -52,6 +52,7 @@ class RecognizeProcess:
 
 
     def goProcess(self,image):
+
         if self.facePass and time.time() - self.facePassTime > 2: #识别通过后延时两秒后进入口罩
             if time.time() - self.facePassTime > 60:   #人脸识别后有效时间
                 self.facePass = False
@@ -86,7 +87,8 @@ class RecognizeProcess:
                         self.glovesPass = True
                         self.glovesFirst = False
                         self.openLock.start()
-                        self.allRecognizeFinish = True 
+                        self.allRecognizeFinish = True
+                        self.gloves.glovesState = False
                         self.getTime = time.time()
                         cv2.imwrite('./recognize_img/'+ self.targetID + '/gloves.png', image) 
                         
@@ -108,6 +110,7 @@ class RecognizeProcess:
                         if self.maskFirstPass == 1:
                             cv2.imwrite('./recognize_img/'+ self.targetID + '/mask.png', image)
                             self.maskPass = True
+                            self.mask.recognizeState = False
                             self.maskPassTime = time.time()
                         if time.time() - self.maskPassTime > 1.5:
                             self.maskPassVoicePlay.start()
@@ -132,10 +135,10 @@ class RecognizeProcess:
                 self.face.recognizedID = None
 
     def getProcess(self):
-        if time.time() - self.getTime > 60:
+        if time.time() - self.getTime > 30:
             self.allRecognizeFinish = False
         # if (time.time() - self.getTime) % 2 == 0:   #开门后读取RFID
-        elif (time.time() - self.getTime) > 3:
+        elif (time.time() - self.getTime) > 6:
             self.getrfid.start()
 
     def process(self,image):
